@@ -14,11 +14,11 @@ plugin_package = "octoprint_robotheme"
 plugin_name = "OctoPrint-robotheme"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.1"
+plugin_version = "0.1.2"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
-plugin_description = """Robo 3D's Theme for OctoPrint"""
+plugin_description = """Robo's theme for OctoPrint"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
 plugin_author = "Allen McAfee"
