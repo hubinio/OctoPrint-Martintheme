@@ -22,28 +22,28 @@
   A. Global
 =================================================== */
 @font-face {
-  font-family: 'Lato';
+  font-family: 'CoreSans';
   font-style: normal;
   font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(/plugin/robotheme/static/fonts/Lato-Light.ttf) format('truetype');
+  src: local('CoreSans Lite'), local('CoreSans-Lite'), url(/plugin/robotheme/static/fonts/CoreSans-Light.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Lato';
+  font-family: 'CoreSans';
   font-style: normal;
   font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(/plugin/robotheme/static/fonts/Lato-Regular.ttf) format('truetype');
+  src: local('CoreSans Regular'), local('CoreSans-Regular'), url(/plugin/robotheme/static/fonts/CoreSans-Regular.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Lato';
+  font-family: 'CoreSans';
   font-style: normal;
   font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(/plugin/robotheme/static/fonts/Lato-Bold.ttf) format('truetype');
+  src: local('CoreSans Bold'), local('CoreSans-Bold'), url(/plugin/robotheme/static/fonts/CoreSans-Bold.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Lato';
+  font-family: 'CoreSans';
   font-style: normal;
   font-weight: 800;
-  src: local('Lato Black'), local('Lato-Black'), url(/plugin/robotheme/static/fonts/Lato-Black.ttf) format('truetype');
+  src: local('CoreSans Black'), local('CoreSans-Black'), url(/plugin/robotheme/static/fonts/CoreSans-Black.ttf) format('truetype');
 }
 * {
   -webkit-box-sizing: border-box;
@@ -52,7 +52,7 @@
 }
 body {
   background-color: #e8e8e8;
-  font-family: 'Core-Sans', Helvetica, Arial, sans-serif;
+  font-family: 'CoreSans', Helvetica, Arial, sans-serif;
   color: #666666;
   -webkit-font-smoothing: antialiased;
   /* Fix for webkit rendering */
@@ -83,7 +83,7 @@ body {
 ================================================= */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-family: 'CoreSans', Helvetica, Arial, sans-serif;
   font-weight: 700;
   color: inherit;
   text-rendering: optimizelegibility;
