@@ -53,7 +53,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
         return dict(
             robotheme=dict(
                 type="github_commit",
-                user="Voxel8",
+                user="AllenMcAfee",
                 repo="OctoPrint-robotheme",
                 branch='master',
                 pip="https://github.com/AllenMcAfee/OctoPrint-robotheme/archive/"
