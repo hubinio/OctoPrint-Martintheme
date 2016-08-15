@@ -11,7 +11,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.SimpleApiPlugin,
                     octoprint.plugin.StartupPlugin):
 
-    printer_name = ""
+    printer_name = ['hostname']
 
     def get_settings_defaults(self):
         return dict(
