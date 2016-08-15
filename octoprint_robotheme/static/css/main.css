@@ -1,0 +1,1594 @@
+/* Robo OctoPrint Theme
+ * Contributors: Allen McAfee (allen@robo3d.com)
+===================================================
+   Table of Contents
+===================================================
+    I. SHARED STYLES
+   II. PRIMARY COMPONENTS
+  III. PANELS
+   IV. THEME ELEMENTS
+    V. COLOR SYSTEM
+   VI. MISCELLANEOUS
+  VII. HELPERS
+ VIII. RESPONSIVE FUNCTIONALITY
+===================================================
+
+===================================================
+  I. SHARED STYLES
+	 A. Global
+	 B. Grid
+	 C. Typography
+===================================================
+  A. Global
+=================================================== */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(/plugin/robotheme/static/fonts/Lato-Light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(/plugin/robotheme/static/fonts/Lato-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(/plugin/robotheme/static/fonts/Lato-Bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Lato Black'), local('Lato-Black'), url(/plugin/robotheme/static/fonts/Lato-Black.ttf) format('truetype');
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background-color: #e8e8e8;
+  font-family: 'Core-Sans', Helvetica, Arial, sans-serif;
+  color: #666666;
+  -webkit-font-smoothing: antialiased;
+  /* Fix for webkit rendering */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-size-adjust: 100%;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.475;
+  overflow-x: hidden;
+}
+/*===============================================
+  B. Grid
+================================================= */
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  padding-left: 11px;
+  padding-right: 11px;
+}
+#terminal_main .span6 {
+  float: left;
+}
+#terminal_main .row-fluid {
+  padding-top: 8px;
+  clear: both;
+}
+/*===============================================
+  C. Typography
+================================================= */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 30px;
+  line-height: 45px;
+}
+h1.small {
+  font-size: 26px;
+}
+h2 {
+  font-size: 21px;
+  line-height: 36px;
+}
+h2.small {
+  font-size: 20px;
+}
+h3 {
+  font-size: 18px;
+  line-height: 27px;
+}
+h3.small {
+  font-size: 16px;
+}
+h4, h5, h6 {
+  line-height: 18px;
+}
+h4 {
+  font-size: 15px;
+}
+h5 {
+  font-size: 13px;
+}
+h5.small, h5 small {
+  font-size: 12px;
+}
+h6 {
+  font-size: 11px;
+  color: #999999;
+}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  font-weight: normal;
+  color: #999999;
+}
+#control h1 {
+  text-align: inherit!important;
+}
+#temperature_wrapper h6 {
+  margin-left: 3px;
+  margin-top: -5px;
+}
+#temperature_monitor .panel h5 {
+  position: absolute;
+  top: 26px;
+}
+/* ================================================
+   II. PRIMARY COMPONENTS
+    A. Navbar
+    B. Sidebar
+    C. Accordions
+    D. Buttons
+    E. Inputs
+    F. Input Groups
+    G. Form Controls
+===================================================
+   A. Navbar
+=================================================== */
+.brand span {
+    /* display: none; */
+}
+.nav-list>.active>a, .nav-list>.active>a:hover {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    background-color: #fa7917;;
+}
+.nav-list>a:hover {
+    color: #5A5A5A;
+}
+.nav>li>a:hover {
+    color: #5A5A5A;
+}
+.navbar {
+  z-index: 1030;
+  margin-bottom: 0;
+  border-radius: 0;
+  min-height: 60px;
+  background-color: #FFF;
+  border: 0;
+  border-bottom: 1px solid #c9c9c9;
+  box-shadow: none;
+  background-repeat: repeat-x;
+  background-image: -webkit-linear-gradient(top, white 1%, #f3f3f3 100%);
+  background-image: linear-gradient(to bottom, #ffffff 1%, #f3f3f3 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f3f3f3', GradientType=0);
+  filter: progid: DXImageTransform.Microsoft.gradient(enabled=false);
+}
+#navbar .navbar-inner {
+  background-color: transparent;
+  background-image: none;
+  background-repeat: no-repeat;
+}
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+  -webkit-box-shadow: 0;
+  -moz-box-shadow: 0;
+  box-shadow: none;
+}
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+  border-width: 0;
+}
+.navbar-inner {
+  min-height: inherit;
+  background-color: transparent;
+  background-image: none;
+  background-repeat: no-repeat;
+  border: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+#navbar .navbar-inner .brand, #navbar .navbar-inner .nav>li>a {
+  /* text-shadow: none; */
+}
+.octoprint-container .tab-content {
+  border: none;
+}
+.navbar-text {
+  padding-top: 10px;
+}
+.navbar .nav .dropdown-toggle .caret {
+  margin-top: 0px;
+}
+.navbar .nav {
+  margin: 0;
+}
+.navbar .brand, .navbar li {
+  line-height: 40px;
+}
+.nav.pull-left {
+  padding-left: 105px;
+  width: auto;
+  display: none;
+  width: 100%;
+  overflow: hidden;
+}
+.nav.pull-left li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 40px;
+  padding: 10px 0;
+}
+.testing_shit {
+  background:blue;
+  float:right;
+}
+.navbar-inner > .container .pull-left-container {
+  width: auto;
+  overflow: hidden;
+}
+.btn-nav-container {
+  float: right;
+}
+nav.pull-left {
+  display: none;
+}
+.nav.pull-left span {
+  width: 100%;
+  float: none;
+  padding: 10px 15px 10px 6px;
+  text-shadow: 0 1px 0 #fff;
+  color: #333;
+  display: inline;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 6px;
+}
+.nav.pull-left img.printer-icon {
+  height: 15px;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+#navbar .brand {
+  position: absolute;
+  top: 0;
+  padding-top: 0;
+}
+#navbar .brand img {
+  width: 85px;
+}
+.brand:after {
+  content: none!important;
+}
+.nav-collapse.collapse {
+  -webkit-transition: height .35s ease;
+  -moz-transition: height .35s ease;
+  -o-transition: height .35s ease;
+  transition: height .35s ease;
+}
+#navbar .navbar-inner .nav li.dropdown.open>.dropdown-toggle, #navbar .navbar-inner .nav li.dropdown.active>.dropdown-toggle, #navbar .navbar-inner .nav li.dropdown.open.active>.dropdown-toggle {
+  background-image: none;
+}
+/*===================================================
+   B. Sidebar
+=================================================== */
+.panel-sidemenu {
+  padding: 20px 0px 25px 0px;
+  background-color: #f6f6f6;
+}
+/*===================================================
+   C. Accordions
+=================================================== */
+.tab-content {
+  border: none;
+}
+.tab-content, .accordion-group {
+  background-color: #fff;
+}
+.accordion-group {
+  margin-bottom: 20px;
+  border: 1px solid #d5d5d5;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.accordion-heading {
+  position: relative;
+  padding: 0;
+  min-height: 40px;
+  line-height: 40px;
+  color: #666;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 2px 2px 0 0;
+  background: #fafafa;
+}
+.accordion-inner {
+  border: none;
+  padding: 15px;
+}
+.accordion-heading .accordion-toggle {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 13px;
+  padding: 0 0 0 15px;
+  color: inherit;
+}
+a.accordion-toggle {
+  width: 100%;
+  text-decoration: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+.octoprint-container .accordion-heading [class^="icon-"], .octoprint-container .accordion-heading [class*=" icon-"] {
+  min-width: 25px;
+  margin-right: 8px;
+  border-right: 1px solid #ddd;
+  color: #69B3E7;
+  padding-right: 8px;
+  font-size: 16px;
+  top: 2px;
+}
+.octoprint-container .accordion-heading .accordion-heading-button [class^="icon-"], .octoprint-container .accordion-heading .accordion-heading-button [class*=" icon-"] {
+  margin-right: 0;
+  border-right: 0;
+  padding-right: 0;
+}
+.settings-trigger {
+  margin-right: 25px;
+}
+.accordion-heading-button {
+  position: absolute;
+  top: 2px;
+  right: 0;
+}
+.tab-content.main-content-wrapper {
+  padding: 0;
+}
+.main-content-wrapper>.tab-pane {
+  display: block;
+}
+/*===================================================
+   D. Buttons
+=================================================== */
+.btn {
+  color: #555555;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border-color: rgba(0, 0, 0, 0.07) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.18);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background-color: #f0f0f0;
+  background-repeat: repeat-x;
+  border: 1px solid transparent;
+  border-color: #cccccc rgba(0, 0, 0, 0.19) rgba(0, 0, 0, 0.18);
+  text-shadow: 0 1px #ffffff;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  outline: none;
+  line-height: 1.47;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#80ffffff', endColorstr='#00ffffff', GradientType=0);
+}
+.btn:hover {
+  background-position: 0px;
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.13) 1%, rgba(255, 255, 255, 0.13) 100%)!important;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.13) 1%, rgba(255, 255, 255, 0.13) 100%)!important;
+}
+.btn:focus {
+  background-color: #f0f0f0;
+  background-position: initial;
+}
+.btn-primary {
+  color: #FFF;
+  outline: none;
+  line-height: 1.47;
+  border-radius: 2px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.07) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.18);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background-color: #00AB8E;
+  background-repeat: repeat-x;
+  filter: none!important;
+  background-image: none!important;
+}
+.btn-danger {
+  color: #FFF;
+  outline: none;
+  line-height: 1.47;
+  border-radius: 2px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.07) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.18);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background-color: #DA4F49;
+  background-repeat: repeat-x;
+  filter: none!important;
+  background-image: none!important;
+}
+.btn-primary[disabled], .btn-primary.disabled{
+    background-color: #00AB8E;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #00AB8E;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .btn-danger.disabled, .btn-danger[disabled] {
+  background-color: #DA4F49;
+}
+.btn:focus, .btn:active {
+  outline: none!important;
+}
+.custom_section_horizontal form.custom_control, .custom_section_vertical form.custom_control, .custom_section_horizontal_grid form.custom_control {
+  display: inline-block;
+  margin: 0;
+}
+.custom_section_horizontal form.custom_control button, .custom_section_vertical form.custom_control button {
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+.custom_section_vertical .slider, .custom_section_horizontal .slider {
+  margin-right: 15px;
+}
+.btn-spread .btn {
+  margin-right: 7px;
+}
+.btn-sm {
+  line-height: 1.5;
+}
+.btn-sm, .btn-group-sm>.btn {
+  padding: 3px 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.heading_buttons {
+  position: absolute;
+  right: 15px;
+  top: -1px;
+}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-group>.btn:last-child {
+  -webkit-border-top-right-radius: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+}
+.btn-group>.btn+.dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+  margin-left: -1px;
+}
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+.btn .caret {
+  margin-left: 0;
+  margin-top: 0;
+}
+.btn-group>.btn:first-child {
+  -webkit-border-bottom-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  -webkit-border-top-left-radius: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.btn-group>.btn:last-child, .btn-group>.dropdown-toggle {
+  -webkit-border-top-right-radius: 2px;
+  border-top-right-radius: 2px;
+  -webkit-border-bottom-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child>.dropdown-toggle {
+  -webkit-border-radius: 0 2px 2px 0;
+  -moz-border-radius: 0 2px 2px 0;
+  border-radius: 0 2px 2px 0;
+}
+/*===================================================
+   E. Inputs
+=================================================== */
+input[type="text"], input[type=number], input[type="password"] {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #DDD;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  box-shadow: none;
+  border-radius: 0;
+}
+input[type="text"]:focus, input[type=number]:focus, input[type="password"]:focus {
+  border-color: #FA7917;
+  box-shadow: none;
+}
+input[type="text"].search-query {
+  width: 100%;
+}
+#navbar_login input[type="checkbox"] {
+  width: auto;
+}
+/*===================================================
+   F. Input Groups
+=================================================== */
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  margin-bottom: 15px;
+}
+.input-group-addon:first-child {
+  border-right: 0;
+}
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child>.btn-group:not(:last-child)>.btn {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #999999;
+  text-align: center;
+  background-color: #fafafa;
+  border: 1px solid #DDD;
+  border-radius: 0;
+  min-width: 40px;
+}
+.input-group-addon, .input-group-btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+/*===================================================
+   G. Form Controls
+=================================================== */
+.input-group-addon, .input-group-btn, .input-group .form-control {
+  display: table-cell;
+}
+.input-group .ui-spinner .form-control:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+.input-group .ui-spinner .form-control:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#terminal_wrapper .form-control {
+  width: 100%;
+}
+#terminal_wrapper input[type="text"].form-control {
+  margin-bottom: 0;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #DDD;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+  border-color: #fa7917;
+  box-shadow: none;
+  outline: none;
+}
+/* ================================================
+  III. PANELS
+    A. General
+===================================================
+   A. General
+=================================================== */
+.panel-body {
+  position: relative;
+}
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.panel-overflow {
+  overflow: hidden;
+}
+.top-widgets .panel {
+  background: #f8f8f8;
+}
+#temperature_monitor .panel {
+  height: 70px;
+}
+.panel-footer {
+  padding: 10px 15px;
+  background-color: #fafafa;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+/* ================================================
+   IV. THEME ELEMENTS
+    A. Icons
+    B. Temperature Graph
+    C. Progress Bars
+    D. Media Panels
+    E. Control Panels
+===================================================
+   A. Icons
+=================================================== */
+.glyphicon, .glyphicons, .imoon, .fa, .iconsweets {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+  -moz-transition: opacity 0.3s ease-in;
+  -webkit-transition: opacity 0.3s ease-in;
+}
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-envelope:before {
+  content: "\f0e0";
+}
+/*===================================================
+   B. Temperature Graph
+=================================================== */
+#temperature-graph {
+  background-image: none !important;
+  height: 250px;
+}
+#tooltip_bar {
+  position: absolute;
+  display: none;
+  border: 1px solid rgba(191, 191, 191, 0.1);
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.04);
+  height: 235px;
+  width: 35px;
+  top: 15px;
+}
+#tooltip {
+  position: absolute;
+  display: none;
+  left: 55px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  font-family: Arial;
+  font-size: 12px;
+  text-align: left;
+  pointer-events: none;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*===================================================
+   C. Progress Bars
+=================================================== */
+.progress {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.progress .bar {
+  background-image: none!important;
+  background-color: #ffb81c;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+  -moz-box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+}
+#gcode_upload_progress {
+  margin-bottom: 10px;
+}
+/*===================================================
+   D. Media Panels
+=================================================== */
+.media {
+  margin-top: 0px;
+  border-bottom: 1px solid #ededed;
+  overflow: hidden;
+  zoom: 1;
+  padding: 8px 25px 8px 25px;
+}
+.media > span.pull-left {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+.media-body {
+  overflow: hidden;
+  zoom: 1;
+}
+.media .bulletColor {
+  float: left;
+  margin-top: 8px;
+  margin-right: 5px;
+}
+.media-heading {
+  white-space: nowrap;
+  margin: 0 0 5px;
+}
+.media-heading small {
+  font-size: 11px;
+}
+.media-object {
+  display: block;
+}
+.media:last-child {
+  border-bottom: none;
+}
+.media:hover {
+  background-color: #EAEAEA;
+  cursor: pointer;
+}
+.media.active {
+  background-color: #E2E2E2;
+}
+.media .pull-left {
+  margin-right: 0px;
+}
+/*===================================================
+   E. Control Panels
+=================================================== */
+.control-panel-left .jog-panel {
+  display: inline-block;
+  margin-right: 22px;
+  text-align: center;
+  vertical-align: middle;
+}
+.control-panel-right .jog-panel {
+  float: left;
+}
+.jog-panel:last-child, .jog-panel .jog-panel:nth-child(2) {
+  margin-right: 0;
+}
+.control-panel-left .jog-panel>div {
+  text-align: center;
+}
+.control-panel-left .jog-panel>div .btn:last-child {
+  margin-right: 0;
+}
+.control-panel-left .control-box, .control-panel-right .control-box {
+  display: block;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.control-panel-right .control-box {
+  vertical-align: middle;
+}
+.control-panel-left .btn-group, .control-panel-right .btn-group {
+  margin-bottom: 10px;
+}
+.control-panel-left .control-box, .control-panel-right .control-box {
+  height: auto;
+}
+.control-panel-left .box, .control-panel-right .box {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-left: 8px;
+}
+.control-panel-left .box, .control-panel-right .box {
+  display: inline-block!important;
+}
+.control-panel-left .distance, .control-panel-right .distance {
+  display: inline-block;
+}
+.control-panel-left .jog-panel .slider, .control-panel-right .jog-panel .slider {
+    margin-bottom: 10px;
+}
+.control-panel-right .jog-panel .slider {
+  width: 100%!important;
+}
+.control-panel-right .control-box {
+  margin:0;
+  margin-bottom: 15px;
+}
+#control_wrapper .accordion-inner {
+  padding: 0;
+}
+.control-panel-right button.dropdown-toggle {
+  width: auto;
+}
+.control-panel-right .jog-panel:last-child .btn {
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+.control-panel-left h2 {
+  line-height: 100%;
+}
+.control-panel-right {
+  vertical-align: top!important;
+}
+.control-panel-right > .jog-panel {
+  width: 50%;
+  padding-right: 55px;
+}
+.control-panel-right > .jog-panel > div {
+  padding-left: 15px;
+}
+.control-panel-right .dropdown-menu {
+  width: 100%;
+}
+.control-panel-right .btn.dropdown-toggle {
+  width: 100%;
+}
+.control-panel-right .input-append {
+  display: table;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.control-panel-right .input-append .input-mini {
+  position: relative;
+  float: left;
+  width: 100%;
+  display: table-cell;
+  border-right: none;
+}
+.control-panel-right .input-append .add-on {
+  white-space: nowrap;
+  vertical-align: middle;
+  display: table-cell;
+  border-collapse: collapse;
+  line-height: 1;
+}
+.control-panel-right .jog-panel:first-child .btn-block:nth-child(3) {
+  float: left;
+  width: 50%;
+  border-right: none;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.control-panel-right .jog-panel:first-child .btn-block:nth-child(4) {
+  float: left;
+  width: 50%;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.control-panel-left .box, .control-panel-right .box {
+  padding-top: 4px;
+}
+#control-zhome {
+  display: none!important;
+}
+#control-zinc, #control-zdec {
+  height: 50px!important;
+}
+/* ================================================
+    V. COLOR SYSTEM
+    A. Text Colors
+    B. Background Colors
+===================================================
+   A. Text Colors
+=================================================== */
+a {
+    color: #5b6770;
+}
+.text-grey {
+  color: #D2D2D2 !important;
+}
+.text-grey2 {
+  color: #808080 !important;
+}
+.text-muted {
+  color: #777;
+}
+.text-light7 {
+  color: #aaaaaa !important;
+}
+/*===================================================
+   B. Background Colors
+=================================================== */
+.bg-orange2 {
+  background-color: #f9892e !important;
+}
+/* ================================================
+   VI. MISCELLANEOUS
+=================================================== */
+.legend {
+    display: none;
+}
+.slider .slider-selection {
+    background-color: #5A5A5A;
+    background-image: linear-gradient(to bottom,#ffb81c,#ffb81c);
+}
+.well {
+  padding: 0 0 12px 12px;
+  margin-bottom: 15px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  font-size: 12px;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.icon-bg {
+  position: absolute;
+  opacity: 0.5;
+  right: 0;
+  top: 0;
+  line-height: 70px;
+  font-size: 70px;
+  margin-top: 7px;
+}
+span.fileinput-button {
+  margin-bottom: 0px!important;
+}
+#terminal-sendpanel {
+  text-align: right;
+}
+#terminal_main small.pull-right {
+  text-align: right;
+}
+.sd-trigger {
+  margin-right: 30px;
+}
+.octoprint-container .accordion.span4:first-of-type {
+  margin-top: 0px;
+}
+.dropdown-menu .divider {
+  height: 2px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #888;
+  border-radius: 10px;
+}
+.accordion-heading .badge {
+  display: block;
+  float: left;
+  margin-top: 13px;
+  margin-right: 7px;
+}
+#files .gcode_files .entry .title {
+  color: #666;
+  font-weight: 700!important;
+}
+.label {
+  display: inline;
+  padding: .3em .7em .4em;
+  font-size: 84%;
+  font-weight: 700;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  background-color: #888;
+}
+.accordion-heading .label {
+  margin-right: 7px;
+}
+#control_wrapper .btn {
+  display: inherit;
+}
+.bulletColor {
+  width: 8px;
+  height: 8px;
+  vertical-align: middle;
+  border-radius: 100%;
+}
+.input-append .add-on, .input-prepend .add-on {
+  height: 34px;
+  padding: 7px 5px;
+}
+.pre-scrollable {
+  height: 340px;
+}
+#control .box {
+  display: inline-block;
+}
+#control .control-box {
+  height: auto;
+}
+.dropdown-menu li>a:hover, .dropdown-menu li>a:focus, .dropdown-submenu:hover>a {
+  background-image: none;
+  background-color: #E4E4E4;
+  color: #777777;
+}
+ul.terminal-options li>a {
+  padding: 3px 15px;
+}
+ul.terminal-options .divider {
+  margin: 5px 0;
+}
+.table-layout > div {
+  display: table-cell;
+  float: none;
+}
+.icon-circle {
+  top: 0;
+  padding: 9px;
+  position: relative;
+  overflow: visible;
+  border-radius: 64px;
+}
+#temperature_wrapper .panel-footer .tab-content {
+  padding-left: 0;
+  padding-top: 0;
+  background-color: transparent;
+}
+#temperature_wrapper label {
+  font-weight: 700;
+}
+#Pneumatics_main .custom_section_horizontal_grid .span3 {
+  width: auto;
+}
+
+#Pneumatics_main .custom_section_horizontal_grid .span6,
+#Pneumatics_main .custom_section_horizontal_grid .span3 {
+  margin-bottom: 10px;
+}
+
+#Pneumatics_main .custom_section_horizontal_grid .span3.first {
+  margin-left: 0px;
+}
+#webcam_wrapper .accordion-inner {
+  padding: 0px;
+}
+#webcam_wrapper .accordion-inner.hide-accordion {
+  height: 0px;
+}
+#wirebonding-div .accordion-inner {
+  padding: 0;
+  margin: 0;
+}
+#wirebonding-div .btn {
+  margin-right: 15px;
+}
+#webcam-error {
+  -webkit-transition: max-height 0.5s, padding-top 0.5s, padding-bottom 0.5s;
+  -moz-transition: max-height 0.5s, padding-top 0.5s, padding-bottom 0.5s;
+  -o-transition: max-height 0.5s, padding-top 0.5s, padding-bottom 0.5s;
+  transition: max-height 0.5s, padding-top 0.5s, padding-bottom 0.5s;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 20px;
+  width: 100%;
+  max-height: 61px;
+  overflow: hidden;
+  color: #a94442;
+}
+#webcam-error.hide-error {
+  border: 0px;
+  max-height: 0;
+  padding: 0px 15px;
+}
+#webcam_image {
+  display: block;
+  width: 100%;
+}
+/*=================================================
+ VII. HELPERS
+   A. General
+   B. Table Layout
+   C. Padding
+   D. Margin
+   E. Line Height
+   F. Borders
+===================================================
+  A. General/Misc Helpers
+=================================================== */
+.va-t {
+  vertical-align: top !important;
+}
+.va-m {
+  vertical-align: middle !important;
+}
+.va-b {
+  vertical-align: bottom !important;
+}
+.va-s {
+  vertical-align: super !important;
+}
+/*===================================================
+  B. Table Layout
+=================================================== */
+#tooltip table {
+  margin: 12px 10px 14px 15px;
+  font-size: 12px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: transparent;
+}
+#tooltip table td {
+  padding: 2px 9px 2px 0;
+  vertical-align: middle;
+}
+/*===================================================
+  C. Padding Helpers
+=================================================== */
+.pn {
+  padding: 0 !important;
+}
+.p2 {
+  padding: 2px !important;
+}
+.p4 {
+  padding: 4px !important;
+}
+.p15 {
+  padding: 15px!important;
+}
+.pl15 {
+  padding-left: 15px!important;
+}
+.pr15 {
+  padding-right: 15px!important;
+}
+.pl20 {
+  padding-left: 20px !important;
+}
+.pt20 {
+  padding-top: 20px !important;
+}
+.p25 {
+  padding: 25px !important;
+}
+.pl25 {
+  padding-left: 25px!important;
+}
+/*===================================================
+  D. Margin Helpers
+=================================================== */
+.mr0 {
+  margin-right: 0px!important;
+}
+.mt0 {
+  margin-top: 0px!important;
+}
+.mr5 {
+  margin-right: 5px!important;
+}
+.mr10 {
+  margin-right: 10px!important;
+}
+.mb10 {
+  margin-bottom: 10px !important;
+}
+.mt15 {
+  margin-top: 15px !important;
+}
+.mb20 {
+  margin-bottom: 20px !important;
+}
+.mb25 {
+  margin-bottom: 25px !important;
+}
+/*===================================================
+  E. Line Height Helpers
+=================================================== */
+.lh15 {
+  line-height: 15px !important;
+}
+/*===================================================
+  F. Border Helpers
+=================================================== */
+.border {
+  border: 1px solid #DDD;
+}
+.border-right {
+  border-right: 1px solid #DDD;
+}
+.bt0 {
+  border-top: 0px!important;
+}
+.blr0 {
+  border-left: 0px!important;
+  border-right: 0px!important;
+}
+.border-orange {
+  border-color: #fbb882 !important;
+}
+.bw2 {
+  border-width: 2px !important;
+}
+.br64 {
+  border-radius: 64px !important;
+}
+/* ================================================
+  VIII. RESPONSIVE FUNCTIONALITY
+     A. 767px and smaller
+     B. 768px and larger
+     C. Between 768px and 979px
+     D. 980px and larger
+     E. Between 980px and 1199px
+===================================================
+   A. 767px and smaller
+=================================================== */
+@media (max-width: 767px) {
+  #navbar_login input, #navbar_login button {
+    width: 100%
+  }
+  .media {
+    float: left;
+    width: 50%;
+  }
+  .temp_wrapper {
+    float: left!important;
+  }
+  #hotend_temp h4, #bed_temp h4 {
+    padding-left: 15px;
+  }
+  #hotend_temp .input-mini, #bed_temp .input-mini {
+    width: 70%;
+  }
+  #hotend_temp .add-on, #bed_temp .add-on {
+    width: 15%;
+  }
+  #hotend_temp .btn-group, #bed_temp .btn-group {
+    width: 15%;
+  }
+  #hotend_temp .input-group, #bed_temp .input-group {
+    width: 100%;
+  }
+  .btn-spread .btn {
+    margin-right: 3.3333333%;
+    width: 30%;
+    float: left;
+    margin-bottom: 15px;
+  }
+  #hotend_temp button.btn[type=submit], #bed_temp button.btn[type=submit] {
+    width: 15%;
+  }
+  #hotend_temp .btn-group .btn, #bed_temp .btn-group .btn {
+    width: 100%!important;
+  }
+  .media {
+    background-color: #F6F6F6;
+  }
+  .media:last-child {
+    border-bottom: 1px solid #ededed;
+  }
+  .page-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .octoprint-container .accordion.span4:first-of-type {
+    margin-top: 50px;
+    -webkit-transition: margin-top .35s ease;
+    -moz-transition: margin-top .35s ease;
+    -o-transition: margin-top .35s ease;
+    transition: margin-top .35s ease;
+  }
+  .navbar .btn-navbar {
+    display: block;
+    margin-top: 15px;
+    margin-right: 0px;
+  }
+  .navbar .brand {
+    padding-left: 5px;
+  }
+  .nav-collapse ul.pull-right {
+    margin-top: 80px;
+  }
+  .nav-collapse span {
+    padding-left: 15px;
+  }
+  .nav-collapse .nav > li > a:hover, .nav-collapse .nav > li > a:focus, .nav-collapse .dropdown-menu a:hover, .nav-collapse .dropdown-menu a:focus {
+    background-color: #E8E8E8;
+  }
+  .print-control button {
+    margin-left: 10px!important;
+  }
+  .print-control button:first-child {
+    margin-left: 0px!important;
+  }
+  #offline_overlay_wrapper, #reloadui_overlay_wrapper {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  #terminal_wrapper .span4 {
+    margin-top: 10px;
+  }
+  #files .gcode_files .entry .size {
+    padding-bottom: 10px;
+  }
+  .accordion-group {
+    border-left: 1px solid #d5d5d5!important;
+    border-right: 1px solid #d5d5d5!important;
+  }
+  .panel-sidemenu.border-right {
+    border: none!important;
+  }
+  #files_wrapper .dropdown-menu {
+    left: inherit;
+    right: 0;
+  }
+  .upload-buttons span.btn:last-child {
+    margin-left: 2.127659574468085%!important;
+  }
+  .control-panel-right > .jog-panel:first-child {
+    padding-right: 15px;
+  }
+  .control-panel-left > .jog-panel:first-child {
+    width: 100%;
+  }
+  .control-panel-right > .jog-panel:last-child {
+    padding-left: 15px;
+    padding-right: 0;
+  }
+  .control-panel-right > .jog-panel > div {
+    padding-left: 0;
+  }
+  .control-panel-right .input-append {
+    width: 100%;
+  }
+  .control-panel-left .jog-panel .slider, .control-panel-left div.distance, .control-panel-left > .jog-panel > button.btn-block:last-child {
+    display: block!important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .control-panel-right .jog-panel:first-child .btn-block:nth-child(3), .control-panel-right .jog-panel:first-child .btn-block:nth-child(4) {
+    padding: 6px;
+  }
+  .navbar-inner .nav-collapse + .pull-left-container {
+    display: none;
+  }
+  #Pneumatics_main .span6, #Pneumatics_main .span3 {
+    display: inline-block;
+  }
+  #Pneumatics_main .span3 {
+    margin-right: 10px;
+  }
+}
+/*===================================================
+   B. 768px and larger
+=================================================== */
+@media (min-width: 768px) {
+  .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+    font-size: 12px;
+    padding-right: 11px;
+  }
+  .table-layout {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+  }
+  .table-layout > div {
+    display: table-cell!important;
+    float: none!important;
+  }
+  .table-layout::after, .table-layout::before {
+    content: initial!important;
+  }
+  .btn-nav-container + .pull-left-container {
+    display: none;
+  }
+}
+/*===================================================
+   C. Between 768px and 979px
+=================================================== */
+@media (min-width: 768px) and (max-width: 979px) {
+  #files .gcode_files .entry .action-buttons {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    text-align: center;
+  }
+  #hotend_temp .row-fluid .span9, #bed_temp .row-fluid .span9 {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+  }
+  #hotend_temp .input-group, #bed_temp .input-group {
+    margin-bottom: 5px;
+  }
+  .btn-spread .btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .media-heading {
+    padding-left: 0!important;
+  }
+  .media .span6 {
+    width: 100%!important;
+  }
+  .control-panel-right > .jog-panel {
+    padding-right: 15px;
+  }
+  .control-panel-right .jog-panel .btn-block {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  .control-panel-left .btn.distance {
+    padding: 6px 8px;
+  }
+  .control-panel-left .box {
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+  .control-panel-left .jog-panel>div .btn:last-child {
+    margin-right: 0px;
+  }
+  .control-panel-left div.distance {
+    margin-top: 10px;
+  }
+  .control-panel-left > .jog-panel > .jog-panel:first-child {
+    margin-right: 6px;
+  }
+  .control-panel-left .jog-panel .slider, .control-panel-left > .jog-panel > button.btn-block:last-child {
+    width: 100%!important;
+  }
+  .control-panel-left {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+/*===================================================
+   D. 980px and larger
+=================================================== */
+@media (min-width: 980px) {
+  #files .gcode_files .entry .size {
+    padding-bottom: 10px;
+  }
+}
+/*===================================================
+   E. Between 980px and 1199px
+=================================================== */
+@media (min-width: 980px) and (max-width: 1199px) {
+  #hotend_temp .span6.pl15, #bed_temp .span6.pl15 {
+    padding-left: 0!important;
+  }
+  .control-panel-right .jog-panel .btn-block {
+    padding: 6px;
+  }
+}
+
+table th.settings_plugin_plugin_manager_plugins_name,table td.settings_plugin_plugin_manager_plugins_name{text-overflow:ellipsis;text-align:left}table th.settings_plugin_plugin_manager_plugins_actions,table td.settings_plugin_plugin_manager_plugins_actions{text-align:center;width:80px}table th.settings_plugin_plugin_manager_plugins_actions a,table td.settings_plugin_plugin_manager_plugins_actions a{text-decoration:none;color:#000}table th.settings_plugin_plugin_manager_plugins_actions a.disabled,table td.settings_plugin_plugin_manager_plugins_actions a.disabled{color:#ccc;cursor:default}#settings_plugin_pluginmanager_repositorydialog .slimScrollDiv{margin-bottom:20px}#settings_plugin_pluginmanager_repositorydialog h4{position:relative}#settings_plugin_pluginmanager_repositorydialog h4 a.dropdown-toggle{color:inherit;text-decoration:none;font-size:14px}#settings_plugin_pluginmanager_repositorydialog h4 ul.dropdown-menu{font-size:14px}#settings_plugin_pluginmanager_repositorydialog .form-search{text-align:center;margin-bottom:5px!important}#settings_plugin_pluginmanager_repositorydialog .form-inline{padding:5px;padding-right:10px;margin-bottom:0}#settings_plugin_pluginmanager_repositorydialog .form-inline .help-block{margin-bottom:0;font-size:85%}#settings_plugin_pluginmanager_repositorydialog #settings_plugin_pluginmanager_repositorydialog_unavailable{overflow:hidden;width:100%;height:300px;background-image:url("../../plugin/pluginmanager/static/img/repo_unavailable.png");text-align:center;display:table}#settings_plugin_pluginmanager_repositorydialog #settings_plugin_pluginmanager_repositorydialog_unavailable div{display:table-cell;vertical-align:middle}#settings_plugin_pluginmanager_repositorydialog #settings_plugin_pluginmanager_repositorydialog_list{overflow:hidden;width:auto;height:300px}#settings_plugin_pluginmanager_repositorydialog #settings_plugin_pluginmanager_repositorydialog_list .entry{border-bottom:1px solid #ddd;padding:5px;padding-right:10px}#settings_plugin_pluginmanager_workingdialog_output .message{font-weight:bold}#settings_plugin_pluginmanager_workingdialog_output .stdout{color:#333}#settings_plugin_pluginmanager_workingdialog_output .stderr{color:#900}#settings_plugin_pluginmanager_workingdialog_output .call{color:#009}
+.chart-legend li span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    white-space: nowrap;
+}
+
+.chart-legend li {
+    line-height: 1.5em;
+    float: left;
+    display: table-cell;
+    width: 33.333%;
+    white-space: nowrap;
+}
+
+.chart-legend ul {
+    display: table;
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.chart-midlegend li span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    white-space: nowrap;
+}
+
+.chart-midlegend li {
+    line-height: 1.5em;
+    float: left;
+    display: table-cell;
+    width: 50%;
+    white-space: nowrap;
+}
+
+.chart-midlegend ul {
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
