@@ -170,6 +170,69 @@ $(function() {
     self.getAdditionalControls = function() {
       return [
         {
+          "children": [
+          {
+            "command": "M125 S%(tpressure)s",
+            "input": [{
+              "default": "40",
+              "name": "Tank Pressure",
+              "parameter": "tpressure",
+              "slider": "false"
+            }],
+            "name": "Set",
+            "offset": "0",
+            "width": "6"
+          },
+          {
+            "command": "M236 S%(epressure)s",
+            "input": [{
+              "default": "18",
+              "name": "Extrusion Pressure",
+              "parameter": "epressure",
+              "slider": "false"
+            }],
+            "name": "Set",
+            "offset": "0",
+            "width": "6"
+          },
+          {
+            "command": "M42 P2 S0",
+            "name": "Close Valve",
+            "width": "3"
+          },
+          {
+            "command": "M42 P2 S255",
+            "name": "Open Valve",
+            "width": "3"
+          },
+          {
+            "commands": ["M400", "M42 P75 S0"],
+            "name": "Raise Silver",
+            "width": "3"
+          },
+          {
+            "commands": ["M400", "M42 P75 S255"],
+            "name": "Lower Silver",
+            "width": "3"
+          }],
+          "layout": "horizontal_grid",
+          "name": "Pneumatics"
+        },
+        {
+          "children": [
+          {
+            "commands": [
+              "T0",
+              "M851 Z-10",
+              "M500",
+              "G28",
+              "G29",
+              "G90",
+              "G1 X75 Y75",
+              "G91",
+              "G1 Z-2.5",
+              "G90"
+            ],
             "name": "Start Bed Re-Zeroing"
           },
           {
@@ -318,7 +381,7 @@ $(function() {
     self.onAllBound = function() {
       // Add ToS link
       $(".footer .pull-right").append(
-        "<li><a href='http://www.robo3d.com/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
+        "<li><a href='http://www.voxel8.co/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
       );
 
       // Merge Temperature and Control tabs
@@ -330,7 +393,7 @@ $(function() {
       $("#temperature-graph").closest(".row").attr("class", "row-fluid");
 
       $("#settings_dialog_label").text("Settings");
-      document.title = "Robo R2 Series";
+      document.title = "Voxel8 DevKit";
       $("#navbar .brand").html("<img src='/plugin/robotheme/static/logo.png' />");
 
       // Merge Control and Terminal tabs
@@ -674,17 +737,17 @@ $(function() {
     }
 
     self.setPrinterName = function(printerName) {
-      if (document.title !== "Robo R2 Series") {
-        document.title = printerName + " \u2016 Robo R2 Series";
+      if (document.title !== "Robo") {
+        document.title = printerName + " \u2016 Robo";
       } else {
-        document.title = printerName + " \u2016 " + document.title;
+        document.title = printerName + " \u2013 " + document.title;
       }
       $(".printer_name_span").text(printerName);
       $(".nav.pull-left").css("display", "block");
     }
 
     self.hidePrinterName = function() {
-      document.title = "Robo R2 Series";
+      document.title = "Robo";
       $(".nav.pull-left").css("display", "none");
     }
   }
