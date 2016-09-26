@@ -40,14 +40,6 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
     def on_api_get(self, request):
         return flask.jsonify(printer_name=self.printer_name)
 
-    # Handles turning off pneumatic devices when print is paused or cancelled
-    # Returns in the form (prefix, postfix)
-    def scripts_hook(self, comm, script_type, script_name, *args, **kwargs):
-        if (not script_type == "gcode" or
-           script_name not in ["afterPrintCancelled", "afterPrintPaused"]):
-            return None
-
-        return ["M42 P2 S0", "M42 P75 S0"], None
 
     def get_update_information(*args, **kwargs):
         return dict(
