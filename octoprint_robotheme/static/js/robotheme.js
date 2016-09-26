@@ -169,55 +169,7 @@ $(function() {
 
     self.getAdditionalControls = function() {
       return [
-        {
-          "children": [
-          {
-            "command": "M125 S%(tpressure)s",
-            "input": [{
-              "default": "40",
-              "name": "Tank Pressure",
-              "parameter": "tpressure",
-              "slider": "false"
-            }],
-            "name": "Set",
-            "offset": "0",
-            "width": "6"
-          },
-          {
-            "command": "M236 S%(epressure)s",
-            "input": [{
-              "default": "18",
-              "name": "Extrusion Pressure",
-              "parameter": "epressure",
-              "slider": "false"
-            }],
-            "name": "Set",
-            "offset": "0",
-            "width": "6"
-          },
-          {
-            "command": "M42 P2 S0",
-            "name": "Close Valve",
-            "width": "3"
-          },
-          {
-            "command": "M42 P2 S255",
-            "name": "Open Valve",
-            "width": "3"
-          },
-          {
-            "commands": ["M400", "M42 P75 S0"],
-            "name": "Raise Silver",
-            "width": "3"
-          },
-          {
-            "commands": ["M400", "M42 P75 S255"],
-            "name": "Lower Silver",
-            "width": "3"
-          }],
-          "layout": "horizontal_grid",
-          "name": "Pneumatics"
-        },
+        
         {
           "children": [
           {
@@ -229,16 +181,14 @@ $(function() {
               "G29",
               "G90",
               "G1 X75 Y75",
-              "G91",
-              "G1 Z-2.5",
-              "G90"
+              "G90",
             ],
-            "name": "Start Bed Re-Zeroing"
+            "name": "Set Z-Offset"
           },
           {
             "commands": [
               "G91",
-              "G1 Z0.025",
+              "G1 Z0.05",
               "G90"
             ],
             "name": "▲"
@@ -246,7 +196,7 @@ $(function() {
           {
             "commands": [
               "G91",
-              "G1 Z-0.025",
+              "G1 Z-0.05",
               "G90"
             ],
             "name": "▼"
@@ -261,7 +211,7 @@ $(function() {
           }],
           "collapsed": "true",
           "layout": "horizontal",
-          "name": "Bed Calibration"
+          "name": "Z-Offset"
         }
       ];
     }
