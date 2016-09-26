@@ -299,10 +299,8 @@ $(function() {
           var targetTemp = targets && targets.length ? formatTemperature(targets[targets.length - 1][1]) : "-";
 
           if (heaterOptions[type].name == "T") {
-            heaterOptions[type].name = "Extruder";
-          } 
-          
-          if (heaterOptions[type].name == "Bed") {
+            heaterOptions[type].name = "Hotend";
+          } else if (heaterOptions[type].name == "Bed") {
             heaterOptions[type].name = "Build Plate";
           }
 
