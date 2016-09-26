@@ -331,7 +331,7 @@ $(function() {
     self.onAllBound = function() {
       // Add ToS link
       $(".footer .pull-right").append(
-        "<li><a href='http://www.voxel8.co/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
+        "<li><a href='http://www.robo3d.com/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
       );
 
       // Merge Temperature and Control tabs
@@ -343,7 +343,7 @@ $(function() {
       $("#temperature-graph").closest(".row").attr("class", "row-fluid");
 
       $("#settings_dialog_label").text("Settings");
-      document.title = "Voxel8 DevKit";
+      document.title = "Robo C2";
       $("#navbar .brand").html("<img src='/plugin/robotheme/static/logo.png' />");
 
       // Merge Control and Terminal tabs
@@ -620,8 +620,6 @@ $(function() {
         $("#webcam_container, #control_main div[data-bind*='keycontrolPossible']").remove();
       }
 
-      $("#Pneumatics_main .custom_section_horizontal_grid .span3").first().addClass("first");
-
       // Manage extra contents of .tab-content
       $("#gcode").remove();
       var tabContentHTML = $(".main-content-wrapper").html().replace(/<!-- ko allowBindings: false -->|<!-- \/ko -->|<!-- ko allowBindings: true -->/g, "");
@@ -637,9 +635,9 @@ $(function() {
           toggleButton.removeClass('hide');
         }
       });
-      if (typeof localStorage["voxel8.gcodeFiles.currentSorting"] === "undefined") {
+      if (typeof localStorage["robo.gcodeFiles.currentSorting"] === "undefined") {
         self.currentSorting = "upload";
-        localStorage["voxel8.gcodeFiles.currentSorting"] = self.currentSorting;
+        localStorage["robo.gcodeFiles.currentSorting"] = self.currentSorting;
         self.files.listHelper.changeSorting(self.currentSorting);
       }
       self.control._enableWebcam();
@@ -666,7 +664,7 @@ $(function() {
         timeInSecs = timeInSecs % 60;
         var seconds = timeInSecs;
         var notification = new Notification(payload.filename + ' - Print Complete', {
-          icon: '/plugin/robotheme/static/square_logo.png',
+          icon: '~/Octoprint-robotheme/octoprint-robotheme/static/logo.png',
           body: "Your print is complete after " + hours + " hour(s), " + minutes + " minute(s), and " + seconds + " second(s).",
         });
         notification.onclick = function () {
