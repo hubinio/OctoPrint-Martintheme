@@ -63,7 +63,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
 
     def get_template_configs(self):
         return [
-            dict(type="settings", name="Robo3D",
+            dict(type="settings", name="Robo",
                  data_bind="visible: loginState.isAdmin()"),
         ]
 
