@@ -370,7 +370,7 @@ $(function() {
       $("#control .terminal").next(".row-fluid").prependTo("#terminal_main .accordion-inner");
       $("#control .terminal").prependTo("#terminal_main .accordion-inner");
 
-      $('link[rel="shortcut icon"]').attr('href', '/plugin/robotheme/static/favicon.ico');
+      $('link[rel="shortcut icon"]').attr('href', '~/Octoprint-robotheme/octoprint-robotheme/static/favicon.ico');
       $("#terminal-output").addClass("well");
 
       $("#terminal_main").after("<div class='panel-footer'><div class='row-fluid'><div class='span8 terminal-textbox'></div><div class='span4 terminal-submit'></div></div></div>");
