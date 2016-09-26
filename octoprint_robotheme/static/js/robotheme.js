@@ -605,7 +605,7 @@ $(function() {
         }
       }, 375, {trailing: false}, {leading: false}));
 
-      $(".navbar-inner .nav-collapse, .btn-navbar").after("<div class='pull-left-container'><ul class='nav pull-left'><li><img class='printer-icon' src='plugin/robotheme/static/icon-printer.png'/><span class='printer_name_span'></span></li></ul></div>");
+      $(".navbar-inner .nav-collapse, .btn-navbar").after("<div class='pull-left-container'><ul class='nav pull-left'><li><span class='printer_name_span'></span></li></ul></div>");
       $(".btn-navbar").wrap("<div class='btn-nav-container'></div>");
       $.ajax({
         type: "GET",
