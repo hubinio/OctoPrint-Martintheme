@@ -169,55 +169,7 @@ $(function() {
 
     self.getAdditionalControls = function() {
       return [
-        {
-          "children": [
-          {
-            "command": "M125 S%(tpressure)s",
-            "input": [{
-              "default": "40",
-              "name": "Tank Pressure",
-              "parameter": "tpressure",
-              "slider": "false"
-            }],
-            "name": "Set",
-            "offset": "0",
-            "width": "6"
-          },
-          {
-            "command": "M236 S%(epressure)s",
-            "input": [{
-              "default": "18",
-              "name": "Extrusion Pressure",
-              "parameter": "epressure",
-              "slider": "false"
-            }],
-            "name": "Set",
-            "offset": "0",
-            "width": "6"
-          },
-          {
-            "command": "M42 P2 S0",
-            "name": "Close Valve",
-            "width": "3"
-          },
-          {
-            "command": "M42 P2 S255",
-            "name": "Open Valve",
-            "width": "3"
-          },
-          {
-            "commands": ["M400", "M42 P75 S0"],
-            "name": "Raise Silver",
-            "width": "3"
-          },
-          {
-            "commands": ["M400", "M42 P75 S255"],
-            "name": "Lower Silver",
-            "width": "3"
-          }],
-          "layout": "horizontal_grid",
-          "name": "Pneumatics"
-        },
+        
         {
           "children": [
           {
@@ -229,16 +181,14 @@ $(function() {
               "G29",
               "G90",
               "G1 X75 Y75",
-              "G91",
-              "G1 Z-2.5",
-              "G90"
+              "G90",
             ],
-            "name": "Start Bed Re-Zeroing"
+            "name": "Set Z-Offset"
           },
           {
             "commands": [
               "G91",
-              "G1 Z0.025",
+              "G1 Z0.05",
               "G90"
             ],
             "name": "▲"
@@ -246,7 +196,7 @@ $(function() {
           {
             "commands": [
               "G91",
-              "G1 Z-0.025",
+              "G1 Z-0.05",
               "G90"
             ],
             "name": "▼"
@@ -261,7 +211,7 @@ $(function() {
           }],
           "collapsed": "true",
           "layout": "horizontal",
-          "name": "Bed Calibration"
+          "name": "Z-Offset"
         }
       ];
     }
@@ -381,7 +331,7 @@ $(function() {
     self.onAllBound = function() {
       // Add ToS link
       $(".footer .pull-right").append(
-        "<li><a href='http://www.voxel8.co/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
+        "<li><a href='http://www.robo3d.com/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
       );
 
       // Merge Temperature and Control tabs
@@ -393,7 +343,7 @@ $(function() {
       $("#temperature-graph").closest(".row").attr("class", "row-fluid");
 
       $("#settings_dialog_label").text("Settings");
-      document.title = "Voxel8 DevKit";
+      document.title = "Robo C2";
       $("#navbar .brand").html("<img src='/plugin/robotheme/static/logo.png' />");
 
       // Merge Control and Terminal tabs
@@ -420,7 +370,7 @@ $(function() {
       $("#control .terminal").next(".row-fluid").prependTo("#terminal_main .accordion-inner");
       $("#control .terminal").prependTo("#terminal_main .accordion-inner");
 
-      $('link[rel="shortcut icon"]').attr('href', '/plugin/robotheme/static/favicon.ico');
+      $('link[rel="shortcut icon"]').attr('href', '~/Octoprint-robotheme/octoprint-robotheme/static/favicon.ico');
       $("#terminal-output").addClass("well");
 
       $("#terminal_main").after("<div class='panel-footer'><div class='row-fluid'><div class='span8 terminal-textbox'></div><div class='span4 terminal-submit'></div></div></div>");
@@ -605,7 +555,7 @@ $(function() {
         }
       }, 375, {trailing: false}, {leading: false}));
 
-      $(".navbar-inner .nav-collapse, .btn-navbar").after("<div class='pull-left-container'><ul class='nav pull-left'><li><img class='printer-icon' src='plugin/robotheme/static/icon-printer.png'/><span class='printer_name_span'></span></li></ul></div>");
+      $(".navbar-inner .nav-collapse, .btn-navbar").after("<div class='pull-left-container'><ul class='nav pull-left'><li><span class='printer_name_span'></span></li></ul></div>");
       $(".btn-navbar").wrap("<div class='btn-nav-container'></div>");
       $.ajax({
         type: "GET",
@@ -670,8 +620,6 @@ $(function() {
         $("#webcam_container, #control_main div[data-bind*='keycontrolPossible']").remove();
       }
 
-      $("#Pneumatics_main .custom_section_horizontal_grid .span3").first().addClass("first");
-
       // Manage extra contents of .tab-content
       $("#gcode").remove();
       var tabContentHTML = $(".main-content-wrapper").html().replace(/<!-- ko allowBindings: false -->|<!-- \/ko -->|<!-- ko allowBindings: true -->/g, "");
@@ -687,9 +635,9 @@ $(function() {
           toggleButton.removeClass('hide');
         }
       });
-      if (typeof localStorage["voxel8.gcodeFiles.currentSorting"] === "undefined") {
+      if (typeof localStorage["robo.gcodeFiles.currentSorting"] === "undefined") {
         self.currentSorting = "upload";
-        localStorage["voxel8.gcodeFiles.currentSorting"] = self.currentSorting;
+        localStorage["robo.gcodeFiles.currentSorting"] = self.currentSorting;
         self.files.listHelper.changeSorting(self.currentSorting);
       }
       self.control._enableWebcam();
@@ -716,7 +664,7 @@ $(function() {
         timeInSecs = timeInSecs % 60;
         var seconds = timeInSecs;
         var notification = new Notification(payload.filename + ' - Print Complete', {
-          icon: '/plugin/robotheme/static/square_logo.png',
+          icon: '~/Octoprint-robotheme/octoprint-robotheme/static/logo.png',
           body: "Your print is complete after " + hours + " hour(s), " + minutes + " minute(s), and " + seconds + " second(s).",
         });
         notification.onclick = function () {
@@ -737,8 +685,8 @@ $(function() {
     }
 
     self.setPrinterName = function(printerName) {
-      if (document.title !== "Voxel8 DevKit") {
-        document.title = printerName + " \u2013 Voxel8 DevKit";
+      if (document.title !== "Robo") {
+        document.title = printerName + " \u2016 Robo";
       } else {
         document.title = printerName + " \u2013 " + document.title;
       }
@@ -747,7 +695,7 @@ $(function() {
     }
 
     self.hidePrinterName = function() {
-      document.title = "Voxel8 DevKit";
+      document.title = "Robo";
       $(".nav.pull-left").css("display", "none");
     }
   }
