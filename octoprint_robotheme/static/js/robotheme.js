@@ -1,3 +1,4 @@
+/*addin in a comment to test new releases*/
 $(function() {
   function robothemeViewModel(parameters) {
     var self = this;
