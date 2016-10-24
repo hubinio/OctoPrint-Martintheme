@@ -44,7 +44,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
     def get_update_information(*args, **kwargs):
         return dict(
             robotheme=dict(
-                type="github_commit",
+                type="github_release",
                 user="AllenMcAfee",
                 repo="OctoPrint-robotheme",
                 branch='master',
