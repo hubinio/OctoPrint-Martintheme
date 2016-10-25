@@ -14,20 +14,20 @@ plugin_package = "octoprint_robotheme"
 plugin_name = "OctoPrint-robotheme"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.3"
+plugin_version = "0.1.1"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
 plugin_description = """Robo's theme for OctoPrint"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Allen McAfee"
+plugin_author = "Robo3D"
 
 # The plugin's author's mail address.
 plugin_author_email = "allen@robo3d.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/AllenMcAfee/OctoPrint-robotheme"
+plugin_url = "https://github.com/Robo3D/OctoPrint-robotheme"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"
