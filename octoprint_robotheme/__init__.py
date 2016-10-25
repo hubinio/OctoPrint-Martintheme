@@ -45,10 +45,10 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
         return dict(
             robotheme=dict(
                 type="github_release",
-                user="AllenMcAfee",
+                user="Robo3D",
                 repo="OctoPrint-robotheme",
                 branch='master',
-                pip="https://github.com/AllenMcAfee/OctoPrint-robotheme/archive/"
+                pip="https://github.com/Robo3D/OctoPrint-robotheme/archive/"
                     "{target_version}.zip",
             )
         )
