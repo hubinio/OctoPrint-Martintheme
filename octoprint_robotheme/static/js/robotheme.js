@@ -347,7 +347,7 @@ $(function() {
 
             // Merge Control and Terminal tabs
             $("#term_link").remove();
-            //$("#gcode_link").remove();
+            $("#gcode_link").remove();
             $("#tabs").remove();
             $("#term").closest(".tab-content").addClass("main-content-wrapper");
             $("#control").prepend($("#term").contents());
@@ -629,7 +629,7 @@ $(function() {
             }
 
             // Manage extra contents of .tab-content
-            //$("#gcode").remove();
+            $("#gcode").remove();
             var tabContentHTML = $(".main-content-wrapper").html().replace(/<!-- ko allowBindings: false -->|<!-- \/ko -->|<!-- ko allowBindings: true -->/g, "");
             if (tabContentHTML.trim().length) {
                 $(".main-content-wrapper").after("<div id='Additional_wrapper' class='accordion-group'> <div class='accordion-heading'> <a class='accordion-toggle' data-toggle='collapse' data-target='#Additional_main'><i class='icon-info-sign'></i> Additional Controls </a> </div> <div id='Additional_main' class='accordion-body collapse in'> <div class='accordion-inner'> </div></div></div></div>");
