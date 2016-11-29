@@ -1,0 +1,11 @@
+MANIFEST.in
+README.md
+setup.py
+OctoPrint_robotheme.egg-info/PKG-INFO
+OctoPrint_robotheme.egg-info/SOURCES.txt
+OctoPrint_robotheme.egg-info/dependency_links.txt
+OctoPrint_robotheme.egg-info/entry_points.txt
+OctoPrint_robotheme.egg-info/not-zip-safe
+OctoPrint_robotheme.egg-info/requires.txt
+OctoPrint_robotheme.egg-info/top_level.txt
+octoprint_robotheme/__init__.py

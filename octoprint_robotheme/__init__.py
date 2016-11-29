@@ -3,6 +3,8 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 import flask
+import socket
+
 
 
 class robothemePlugin(octoprint.plugin.SettingsPlugin,
@@ -11,7 +13,11 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.SimpleApiPlugin,
                     octoprint.plugin.StartupPlugin):
 
-    printer_name = ['hostname']
+    def __init__(self):
+        
+        
+        hostname = socket.gethostname() + ".local"
+        self.printer_name = [hostname]
 
     def get_settings_defaults(self):
         return dict(
@@ -61,13 +67,12 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
 
 
 def __plugin_load__():
-    global __plugin_implementation__
-    global __plugin_hooks__
-    __plugin_implementation__ = robothemePlugin()
+    plugin = robothemePlugin()
+    global __plugin_implementation__    
+    __plugin_implementation__ = plugin
 
+    global __plugin_hooks__
     __plugin_hooks__ = {
-        "octoprint.plugin.softwareupdate.check_config":
-            __plugin_implementation__.get_update_information,
-        "octoprint.comm.protocol.scripts":
-            __plugin_implementation__.scripts_hook,
+        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
+        #"octoprint.comm.protocol.scripts": __plugin_implementation__.scripts_hook,
     }
