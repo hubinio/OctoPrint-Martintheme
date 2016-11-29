@@ -14,8 +14,6 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.StartupPlugin):
 
     def __init__(self):
-        
-        
         hostname = socket.gethostname() + ".local"
         self.printer_name = [hostname]
 
