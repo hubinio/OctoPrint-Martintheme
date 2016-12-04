@@ -164,7 +164,7 @@ $(function() {
 
         self.control.onBeforeBinding = function() {
             $("#control-xyhome").attr("data-bind", function() {
-                return $(this).attr("data-bind").replace(/sendHomeCommand\(\[\'x\', \'y\'\]\)/g, "sendCustomCommand({type:'commands',commands:['G28', 'G29']})");
+                return $(this).attr("data-bind").replace(/sendHomeCommand\(\[\'x\', \'y\'\]\)/g, "sendCustomCommand({type:'commands',commands:['G28']})");
             });
         };
 
@@ -204,7 +204,7 @@ $(function() {
                             "G1 Z10",
                             "G28 X Y"
                         ],
-                        "name": "Set Bed Zero"
+                        "name": "Set Z-Offset"
                     }],
                     "collapsed": "true",
                     "layout": "horizontal",
