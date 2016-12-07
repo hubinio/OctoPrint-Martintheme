@@ -71,5 +71,4 @@ def __plugin_load__():
     global __plugin_hooks__
     __plugin_hooks__ = {
         "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-        #"octoprint.comm.protocol.scripts": __plugin_implementation__.scripts_hook,
     }
