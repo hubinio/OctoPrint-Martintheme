@@ -52,8 +52,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
                 user="Robo3D",
                 repo="OctoPrint-robotheme",
                 branch='master',
-                pip="https://github.com/Robo3D/OctoPrint-robotheme/archive/"
-                    "{target_version}.zip",
+                pip="https://github.com/Robo3D/OctoPrint-robotheme/archive/{target_version}.zip"
             )
         )
 
