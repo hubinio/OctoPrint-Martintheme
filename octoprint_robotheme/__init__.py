@@ -45,7 +45,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
         return flask.jsonify(printer_name=self.printer_name)
 
 
-    def get_update_information(*args, **kwargs):
+    def get_update_information(self):
         return dict(
             robotheme=dict(
                 type="github_release",
