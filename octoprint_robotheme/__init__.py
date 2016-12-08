@@ -44,35 +44,35 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
     def on_api_get(self, request):
         return flask.jsonify(printer_name=self.printer_name)
 
-
-    def get_update_information(self):
-        return dict(
-            robotheme=dict(
-                displayName = "Robo Theme",
-                displayVersion = self._plugin_version,
-
-                type="github_release",
-                user="Robo3D",
-                repo="OctoPrint-robotheme",
-                branch='master',
-                
-                pip="https://github.com/Robo3D/OctoPrint-robotheme/archive/{target_version}.zip"
-            )
-        )
-
     def get_template_configs(self):
         return [
             dict(type="settings", name="Robo",
                  data_bind="visible: loginState.isAdmin()"),
         ]
 
+    ##~~ Softwareupdate hook
+    def get_update_information(self):
+        return dict(
+        robotheme=dict(
+            displayName = "Robo Theme",
+            displayVersion = self._plugin_version,
+
+            type="github_release",
+            user="Robo3D",
+            repo="OctoPrint-robotheme",
+            current=self._plugin_version,
+
+            pip="https://github.com/Robo3D/OctoPrint-robotheme/archive/{target_version}.zip"
+            )
+        )
+
+__plugin_name__ = "Robo Theme"
 
 def __plugin_load__():
-    plugin = robothemePlugin()
     global __plugin_implementation__    
-    __plugin_implementation__ = plugin
+    __plugin_implementation__ = robothemePlugin()
 
     global __plugin_hooks__
     __plugin_hooks__ = {
-        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
+        "octoprint.plugin.softwareupdate.check_config":__plugin_implementation__.get_update_information
     }
