@@ -48,10 +48,14 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
     def get_update_information(self):
         return dict(
             robotheme=dict(
+                displayName = "Robo Theme",
+                displayVersion = self._plugin_version,
+
                 type="github_release",
                 user="Robo3D",
                 repo="OctoPrint-robotheme",
                 branch='master',
+                
                 pip="https://github.com/Robo3D/OctoPrint-robotheme/archive/{target_version}.zip"
             )
         )
