@@ -24,7 +24,7 @@ plugin_description = """Robo's theme for OctoPrint"""
 plugin_author = "Robo3D"
 
 # The plugin's author's mail address.
-plugin_author_email = "allen@robo3d.com"
+plugin_author_email = "developer@robo3d.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
 plugin_url = "https://github.com/Robo3D/OctoPrint-robotheme"
