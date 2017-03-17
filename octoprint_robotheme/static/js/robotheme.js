@@ -34,6 +34,7 @@ $(function() {
      * Reason: Need to give every control a plugin_control attribute to identify
      * which custom controls are created by plugins
      */
+     /*
     self.oldProcess = self.control._processControl;
     self.control._processControl = function (control) {
       self.oldProcess(control);
@@ -60,6 +61,7 @@ $(function() {
         webcamImage.attr("src", newSrc);
       }
     };
+    */
 
     /* Modified from OctoPrint
      * Reason: Edit how line numbers are displayed and make terminal think
@@ -153,13 +155,15 @@ $(function() {
       if (typeof self.temperature.plot !== "undefined") self.temperature.plot.unhighlight();
     }
 
+
+
     /* Modified from OctoPrint
      * Reason: Adding additional controls for z-offset wizard
      */
-
+/*
     self.getAdditionalControls = function() {
       return [
-        
+
         {
           "children": [
           {
@@ -261,7 +265,7 @@ $(function() {
         $(this).remove();
       });
     };
-
+*/
     /* Modified from OctoPrint
      * Reason: Remove temperature from label as well as renaming tool "T" to "Hotend"
      * and to apply our own colors
@@ -351,7 +355,7 @@ $(function() {
       } else {
         $("#control_wrapper").after("<div id='terminal_wrapper' class='accordion-group'><div class='accordion-heading'><a class='accordion-toggle' data-toggle='collapse' data-target='#terminal_main'><i class='icon-info-sign'></i> Commands <div class='terminal_input'></div></a></div><div id='terminal_main' class='accordion-body collapse'><div class='accordion-inner'></div></div>");
       }
-      //Make accordian rows, instead of default tabbed UI  
+      //Make accordian rows, instead of default tabbed UI
       $("#temperature-graph").parent().next(".row-fluid").prependTo("#temperature_main .accordion-inner");
       $("#temperature-graph").prependTo("#temperature_main .accordion-inner");
       $("#temperature-graph").wrap("<div class='temp-graph-wrapper'></div>");
@@ -363,7 +367,7 @@ $(function() {
 
       $('link[rel="shortcut icon"]').attr('href', '~/Octoprint-robotheme/octoprint-robotheme/static/favicon.ico');
       $("#terminal-output").addClass("well");
-       
+
       $("#terminal_main").after("<div class='panel-footer'><div class='row-fluid'><div class='span8 terminal-textbox'></div><div class='span4 terminal-submit'></div></div></div>");
       $("#terminal_wrapper .accordion-heading").append("<div class='heading_buttons'><div class='label line-container'></div><button type='button' class='btn btn-default btn-gradient btn-sm dropdown-toggle' data-toggle='dropdown'><span class='caret'></span></button><ul class='dropdown-menu pull-right terminal-options' role='menu'></ul></div>");
       $(".terminal span[data-bind*='lineCount']").appendTo("#terminal_wrapper .heading_buttons .label");
@@ -640,6 +644,7 @@ $(function() {
       self.parseCustomControls();
     }
 
+     // Styling for Print Complete Desktop notification
     self.onEventPrintDone = function(payload) {
       if (typeof Notification === 'undefined') {
         console.log('Desktop notifications not available in your browser. Try Chromium.');
@@ -677,9 +682,9 @@ $(function() {
 
     self.setPrinterName = function(printerName) {
       if (document.title !== "Robo") {
-        document.title = printerName + " \u2016 Robo";
+        document.title = printerName + " \u2017 Robo";
       } else {
-        document.title = printerName + " \u2013 " + document.title;
+        document.title = printerName + " \u2017 " + document.title;
       }
       $(".printer_name_span").text(printerName);
       $(".nav.pull-left").css("display", "block");
