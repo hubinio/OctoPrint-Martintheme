@@ -34,7 +34,7 @@ $(function() {
      * Reason: Need to give every control a plugin_control attribute to identify
      * which custom controls are created by plugins
      */
-     /*
+
     self.oldProcess = self.control._processControl;
     self.control._processControl = function (control) {
       self.oldProcess(control);
@@ -42,6 +42,7 @@ $(function() {
       return control;
     };
 
+/*
     self.control._enableWebcam = function() {
       if (self.control.webcamDisableTimeout != undefined) {
         clearTimeout(self.control.webcamDisableTimeout);
@@ -60,8 +61,8 @@ $(function() {
         self.control.updateRotatorWidth();
         webcamImage.attr("src", newSrc);
       }
-    };
-    */
+    };      */
+
 
     /* Modified from OctoPrint
      * Reason: Edit how line numbers are displayed and make terminal think
@@ -160,55 +161,8 @@ $(function() {
     /* Modified from OctoPrint
      * Reason: Adding additional controls for z-offset wizard
      */
-/*
-    self.getAdditionalControls = function() {
-      return [
 
-        {
-          "children": [
-          {
-            "commands": [
-              "T0",
-              "M851 Z-10",
-              "M500",
-              "G28",
-              "G29",
-              "G90",
-              "G1 X75 Y75",
-              "G90",
-            ],
-            "name": "Set Z-Offset"
-          },
-          {
-            "commands": [
-              "G91",
-              "G1 Z0.05",
-              "G90"
-            ],
-            "name": "▲"
-          },
-          {
-            "commands": [
-              "G91",
-              "G1 Z-0.05",
-              "G90"
-            ],
-            "name": "▼"
-          },
-          {
-            "commands": [
-              "M852",
-              "G1 Z10",
-              "G28 X Y"
-            ],
-            "name": "Set Bed Zero"
-          }],
-          "collapsed": "true",
-          "layout": "horizontal",
-          "name": "Z-Offset"
-        }
-      ];
-    }
+    self.getAdditionalControls = function()
 
     self.customControls.onEventSettingsUpdated = function (payload) {
       $(".parsed-control").each(function() {
@@ -217,22 +171,6 @@ $(function() {
         }
       });
       self.customControls.requestData();
-    }
-
-    self.generateWrapperName = function(name, increment) {
-      if (increment) {
-        if ($(".octoprint-container").find("#" + name + "_" + increment + "_wrapper").length > 0) {
-          return self.generateWrapperName(name, ++increment);
-        } else {
-          return name + "_" + increment + "_wrapper";
-        }
-      } else {
-        if ($(".octoprint-container").find("#" + name + "_wrapper").length > 0) {
-          return self.generateWrapperName(name, 1);
-        } else {
-          return name + "_wrapper";
-        }
-      }
     }
 
     self.parseCustomControls = function() {
@@ -265,7 +203,7 @@ $(function() {
         $(this).remove();
       });
     };
-*/
+
     /* Modified from OctoPrint
      * Reason: Remove temperature from label as well as renaming tool "T" to "Hotend"
      * and to apply our own colors
@@ -635,7 +573,7 @@ $(function() {
         localStorage["robo.gcodeFiles.currentSorting"] = self.currentSorting;
         self.files.listHelper.changeSorting(self.currentSorting);
       }
-      self.control._enableWebcam();
+      //self.control._enableWebcam();
     };
 
     self.oldControl = self.customControls.rerenderControls;
