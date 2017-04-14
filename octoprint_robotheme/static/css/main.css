@@ -1592,3 +1592,18 @@ table th.settings_plugin_plugin_manager_plugins_name,table td.settings_plugin_pl
     margin-bottom: 20px;
     overflow: hidden;
 }
+
+#webcam_container {
+    width: 122%;
+    overflow: hidden;
+    height: 463px;
+}
+
+#webcam_image {
+    position: relative;
+    top: -54px;
+    left: -47px;
+    -ms-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+}
