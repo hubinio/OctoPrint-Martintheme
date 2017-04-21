@@ -30,37 +30,6 @@ $(function() {
         };
 
         /* Modified from OctoPrint
-         * Reason: Need to give every control a plugin_control attribute to identify
-         * which custom controls are created by plugins
-         */
-        self.oldProcess = self.control._processControl;
-        self.control._processControl = function(control) {
-            self.oldProcess(control);
-            control.plugin_control = control.hasOwnProperty("plugin_control") ? ko.observable(true) : ko.observable(false);
-            return control;
-        };
-
-        self.control._enableWebcam = function() {
-            if (self.control.webcamDisableTimeout != undefined) {
-                clearTimeout(self.control.webcamDisableTimeout);
-            }
-            var webcamImage = $("#webcam_image");
-            var currentSrc = webcamImage.attr("src");
-            if (currentSrc === undefined || currentSrc.trim() == "") {
-                var newSrc = CONFIG_WEBCAM_STREAM;
-                if (CONFIG_WEBCAM_STREAM.lastIndexOf("?") > -1) {
-                    newSrc += "&";
-                } else {
-                    newSrc += "?";
-                }
-                newSrc += new Date().getTime();
-
-                self.control.updateRotatorWidth();
-                webcamImage.attr("src", newSrc);
-            }
-        };
-
-        /* Modified from OctoPrint
          * Reason: Edit how line numbers are displayed and make terminal think
          * its tab is active
          */
