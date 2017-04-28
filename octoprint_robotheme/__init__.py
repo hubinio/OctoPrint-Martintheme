@@ -11,11 +11,26 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.TemplatePlugin,
                     octoprint.plugin.AssetPlugin,
                     octoprint.plugin.SimpleApiPlugin,
-                    octoprint.plugin.StartupPlugin):
+                    octoprint.plugin.StartupPlugin,
+                    octoprint.plugin.UiPlugin):
 
     def __init__(self):
         hostname = socket.gethostname() + ".local"
         self.printer_name = [hostname]
+
+    def will_handle_ui(self, request):
+        return True
+
+    def on_ui_render(self, now, request, render_kwargs):
+        from flask import make_response, render_template
+        render_kwargs['now'] = now
+        render_kwargs['gcodeThreshold'] = 20971520
+        render_kwargs['gcodeMobileThreshold'] = 2097152
+        t = """ :::These are the kwargs:::
+        {}
+        """.format(render_kwargs)
+        self._logger.info(t)
+        return make_response(render_template('index.jinja2', **render_kwargs))
 
     def get_settings_defaults(self):
         return dict(
@@ -26,8 +41,8 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
 
     def get_assets(self):
         return dict(
-            js=['js/robotheme.js'],
-            css=['css/main.css'],
+            # js=['js/robotheme.js'],
+            # css=['css/main.css'],
         )
 
     def get_api_commands(self):
@@ -69,7 +84,7 @@ class robothemePlugin(octoprint.plugin.SettingsPlugin,
 __plugin_name__ = "Robo Theme"
 
 def __plugin_load__():
-    global __plugin_implementation__    
+    global __plugin_implementation__
     __plugin_implementation__ = robothemePlugin()
 
     global __plugin_hooks__
