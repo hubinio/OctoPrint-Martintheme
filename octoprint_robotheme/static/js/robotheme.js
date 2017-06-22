@@ -585,11 +585,12 @@ $(function() {
                 $("#webcam_main .accordion-inner").removeClass("hide-accordion");
                 $("#webcam-error").addClass("hide-error");
                 // webcam toggle button off
-                var button_off = "<div id='webcam_toggle'> <button id='webcam_button'>Off</button></div>";
+                var button_off = "<div id='webcam_toggle'> <button id='webcam_button'>Turn Camera Off</button></div>";
                 $(button_off).appendTo("#webcam_wrapper .accordion-inner");
                 $('#webcam_button').click(function(e){
                     OctoPrint.system.executeCommand('custom', 'streamoff');
-                    location.reload();
+                    setTimeout(function(){location.reload();}, 500);
+
                 });
 
             }).error(function() {
@@ -598,11 +599,11 @@ $(function() {
                 $("#webcam-error").removeClass("hide-error");
 
                 // webcam toggle button ON
-                var button_on = "<div id='webcam_toggle'> <button id='webcam_button'>On</button></div>";
+                var button_on = "<div id='webcam_toggle'> <button id='webcam_button'>Turn Camera On</button></div>";
                 $(button_on).appendTo("#webcam_wrapper .accordion-inner");
                 $('#webcam_button').click(function(e) {
                     OctoPrint.system.executeCommand('custom', 'streamon');
-                    location.reload();
+                    setTimeout(function(){location.reload();}, 500);
                 });
 
             });
