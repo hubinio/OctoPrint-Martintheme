@@ -584,10 +584,27 @@ $(function() {
             $("#webcam_container img").load(function() {
                 $("#webcam_main .accordion-inner").removeClass("hide-accordion");
                 $("#webcam-error").addClass("hide-error");
+                // webcam toggle button off
+                var button_off = "<div id='webcam_toggle'> <button id='webcam_button'>Off</button></div>";
+                $(button_off).appendTo("#webcam_wrapper .accordion-inner");
+                $('#webcam_button').click(function(e){
+                    OctoPrint.system.executeCommand('custom', 'streamoff');
+                    location.reload();
+                });
+
             }).error(function() {
                 $(this).remove();
                 $("#webcam_main .accordion-inner").removeClass("hide-accordion");
                 $("#webcam-error").removeClass("hide-error");
+
+                // webcam toggle button ON
+                var button_on = "<div id='webcam_toggle'> <button id='webcam_button'>On</button></div>";
+                $(button_on).appendTo("#webcam_wrapper .accordion-inner");
+                $('#webcam_button').click(function(e) {
+                    OctoPrint.system.executeCommand('custom', 'streamon');
+                    location.reload();
+                });
+
             });
         };
 
@@ -624,6 +641,7 @@ $(function() {
             if (CONFIG_WEBCAM_STREAM && self.settings.webcam.enabled()) {
                 $("#control_main div[data-bind*='keycontrolPossible']").remove();
                 $("#webcam_container").appendTo("#webcam_wrapper .accordion-inner");
+
             } else {
                 $("#webcam_container, #control_main div[data-bind*='keycontrolPossible']").remove();
             }
