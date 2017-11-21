@@ -1,10 +1,10 @@
 Metadata-Version: 1.0
 Name: OctoPrint-robotheme
-Version: 0.2.0
+Version: 0.2.3
 Summary: Robo's theme for OctoPrint
 Home-page: https://github.com/Robo3D/OctoPrint-robotheme
-Author: Robo3D
-Author-email: allen@robo3d.com
+Author: Robo
+Author-email: engineering@robo3d.com
 License: AGPLv3
 Description: UNKNOWN
 Platform: UNKNOWN
