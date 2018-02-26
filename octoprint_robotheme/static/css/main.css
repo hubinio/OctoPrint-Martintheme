@@ -1315,7 +1315,7 @@ ul.terminal-options .divider {
     padding-left: 15px;
   }
   #hotend_temp .input-mini, #bed_temp .input-mini {
-    width: 70%;
+    width: 70px;
   }
   #hotend_temp .add-on, #bed_temp .add-on {
     width: 15%;
