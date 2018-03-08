@@ -30,6 +30,37 @@ $(function() {
         };
 
         /* Modified from OctoPrint
+         * Reason: Need to give every control a plugin_control attribute to identify
+         * which custom controls are created by plugins
+         */
+        self.oldProcess = self.control._processControl;
+        self.control._processControl = function(control) {
+            self.oldProcess(control);
+            control.plugin_control = control.hasOwnProperty("plugin_control") ? ko.observable(true) : ko.observable(false);
+            return control;
+        };
+
+        self.control._enableWebcam = function() {
+            if (self.control.webcamDisableTimeout != undefined) {
+                clearTimeout(self.control.webcamDisableTimeout);
+            }
+            var webcamImage = $("#webcam_image");
+            var currentSrc = webcamImage.attr("src");
+            if (currentSrc === undefined || currentSrc.trim() == "") {
+                var newSrc = CONFIG_WEBCAM_STREAM;
+                if (CONFIG_WEBCAM_STREAM.lastIndexOf("?") > -1) {
+                    newSrc += "&";
+                } else {
+                    newSrc += "?";
+                }
+                newSrc += new Date().getTime();
+
+                self.control.updateRotatorWidth();
+                webcamImage.attr("src", newSrc);
+            }
+        };
+
+        /* Modified from OctoPrint
          * Reason: Edit how line numbers are displayed and make terminal think
          * its tab is active
          */
@@ -124,6 +155,63 @@ $(function() {
         /* Modified from OctoPrint
          * Reason: Change homing button to run G28 & G29 instead of built in homing function
          */
+        self.onBeforeBinding = function() {
+            $("#customControls_containerTemplate_collapsable, #customControls_containerTemplate_nameless").html(function() {
+                return $(this).html().replace(/"custom_section">/g, '"custom_section" data-bind="css: { plugin_control: (plugin_control) }">');
+            });
+            self.settings = self.settings.settings.plugins.robotheme;
+        };
+
+        self.control.onBeforeBinding = function() {
+            $("#control-xyhome").attr("data-bind", function() {
+                return $(this).attr("data-bind").replace(/sendHomeCommand\(\[\'x\', \'y\'\]\)/g, "sendCustomCommand({type:'commands',commands:['G28']})");
+            });
+        };
+
+        self.getAdditionalControls = function() {
+            return [
+
+                {
+                    "children": [{
+                        "commands": [
+                            "T0",
+                            "M851 Z-10",
+                            "M500",
+                            "G28",
+                            "G29",
+                            "G90",
+                            "G1 X75 Y75",
+                            "G90",
+                        ],
+                        "name": "Set Z-Offset"
+                    }, {
+                        "commands": [
+                            "G91",
+                            "G1 Z0.05",
+                            "G90"
+                        ],
+                        "name": "▲"
+                    }, {
+                        "commands": [
+                            "G91",
+                            "G1 Z-0.05",
+                            "G90"
+                        ],
+                        "name": "▼"
+                    }, {
+                        "commands": [
+                            "M852",
+                            "G1 Z10",
+                            "G28 X Y"
+                        ],
+                        "name": "Set Z-Offset"
+                    }],
+                    "collapsed": "true",
+                    "layout": "horizontal",
+                    "name": "Z-Offset"
+                }
+            ];
+        }
 
         self.customControls.onEventSettingsUpdated = function(payload) {
             $(".parsed-control").each(function() {
@@ -225,10 +313,23 @@ $(function() {
             $("#navbar .brand").html("<img src='/plugin/robotheme/static/logo.png' />");
 
 
-            $("#temperature-graph").parent().next(".row-fluid").prependTo("#temperature_main .accordion-inner");
-            $("#temperature-graph").prependTo("#temperature_main .accordion-inner");
-            $("#temperature-graph").wrap("<div class='temp-graph-wrapper'></div>");
-            $("#temperature_main table-bordered").remove();
+            $(".line-container").after($(".terminal button[data-bind*='toggleAutoscroll']").addClass("btn-default btn-sm text-light7 mr5"));
+            $(".terminal-options").append("<li class='divider'></li>");
+            $("#terminal-filterpanel label.checkbox").each(function() {
+                var commandName = $(this).find("input").attr("value").match("Send: (.*)Recv")[1];
+                commandName = commandName.replace(/\(|\)|\|/g, "");
+                $(this).find("span").replaceWith("<span>Supress " + commandName + "</span>");
+                $(this).css('margin-bottom', '0');
+                $("ul.terminal-options").append(
+                    $('<li>').append(
+                        $('<a>').attr('href', '#').append(
+                            $(this)
+                        )))
+            });
+            $("#terminal-sendpanel .input-append input").addClass("form-control").attr("placeholder", "Enter a command...").appendTo(".terminal-textbox");
+            $("#terminal-sendpanel .input-append button").addClass("btn-default btn-gradient btn-block").appendTo(".terminal-submit");
+            $("#terminal-filterpanel").parent().remove();
+            $(".terminal .pull-left, .terminal .pull-right").remove();
 
             $(".temperature-height").click(function() {
                 $(".temperature-height").toggleClass("active");
@@ -244,7 +345,6 @@ $(function() {
                     height: ($("#temperature-graph").height() == 250) ? 485 : 235
                 }, 250);
             });
-            $("<div id='tooltip_bar'><div id='tooltip'><table><tbody></tbody></table></div></div>").appendTo("#temperature_main .accordion-inner");
 
             var legends = $("#temperature-graph .legendLabel");
             legends.each(function() {
@@ -379,6 +479,7 @@ $(function() {
                 }
             });
 
+
             $(".navbar-inner .nav-collapse, .btn-navbar").after("<div class='pull-left-container'><ul class='nav pull-left'><li><span class='printer_name_span'></span></li></ul></div>");
             $(".btn-navbar").wrap("<div class='btn-nav-container'></div>");
             $.ajax({
@@ -389,7 +490,7 @@ $(function() {
                 success: function(response) {
                     if (response.printer_name && response.printer_name != "") {
                         self.setPrinterName(response.printer_name);
-                    } aelse {
+                    } else {
                         self.hidePrinterName();
                     }
                 },
@@ -405,6 +506,39 @@ $(function() {
             }
             self.temperature.updatePlot();
         }
+
+        self.onStartupComplete = function() {
+            self.parseCustomControls();
+
+            $('<div class="panel-footer pn bt0"><div class="row-fluid table-layout"><div class="span4 panel-sidemenu border-right control-panel-left"></div><div class="span8 p15 pt20 control-panel-right"></div></div></div>').prependTo("#control_main");
+            $('#control .jog-panel').first().appendTo(".control-panel-left");
+            $('#control .jog-panel').each(function() {
+                $(this).appendTo(".control-panel-right");
+            });
+            $(".control-panel-left h1").each(function(i, em) {
+                $(em).replaceWith('<h2>' + $(em).html() + '</h2>');
+            });
+            $(".control-panel-right h1").each(function(i, em) {
+                $(em).replaceWith('<h4>' + $(em).html() + '</h4>');
+            });
+            $("#terminal_main small.pull-left span").css({
+                "display": "block",
+                "text-align": "right"
+            }).appendTo("#terminal_main small.pull-right");
+            $(".sd-trigger a:first").html('<i class="icon-file"></i>');
+            $("#temp").remove();
+            $("#term").remove();
+
+            // Manage extra contents of .tab-content
+            var tabContentHTML = $(".main-content-wrapper").html().replace(/<!-- ko allowBindings: false -->|<!-- \/ko -->|<!-- ko allowBindings: true -->/g, "");
+
+            if (typeof localStorage["robo.gcodeFiles.currentSorting"] === "undefined") {
+                self.currentSorting = "upload";
+                localStorage["robo.gcodeFiles.currentSorting"] = self.currentSorting;
+                self.files.listHelper.changeSorting(self.currentSorting);
+            }
+            self.control._enableWebcam();
+        };
 
         self.oldControl = self.customControls.rerenderControls;
         self.customControls.rerenderControls = function() {
