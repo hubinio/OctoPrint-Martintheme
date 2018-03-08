@@ -60,29 +60,6 @@ $(function() {
             }
         };
 
-        /* Modified from OctoPrint
-         * Reason: Edit how line numbers are displayed and make terminal think
-         * its tab is active
-         */
-        self.terminal.lineCount = ko.computed(function() {
-            var total = self.terminal.log().length;
-            var displayed = _.filter(self.terminal.displayedLines(), function(entry) {
-                return entry.type == "line"
-            }).length;
-            var filtered = total - displayed;
-
-            if (total == displayed) {
-                return _.sprintf(gettext("%(displayed)d"), {
-                    displayed: displayed
-                });
-            } else {
-                return _.sprintf(gettext("%(displayed)d/%(total)d"), {
-                    displayed: displayed,
-                    total: total
-                });
-            }
-        });
-        self.terminal.tabActive = true;
 
         /* Modified from OctoPrint
          * Reason: Edit color options, as well as number of ticks, and min/max values
@@ -152,67 +129,6 @@ $(function() {
             if (typeof self.temperature.plot !== "undefined") self.temperature.plot.unhighlight();
         }
 
-        /* Modified from OctoPrint
-         * Reason: Change homing button to run G28 & G29 instead of built in homing function
-         */
-        self.onBeforeBinding = function() {
-            $("#customControls_containerTemplate_collapsable, #customControls_containerTemplate_nameless").html(function() {
-                return $(this).html().replace(/"custom_section">/g, '"custom_section" data-bind="css: { plugin_control: (plugin_control) }">');
-            });
-            self.settings = self.settings.settings.plugins.robotheme;
-        };
-
-        self.control.onBeforeBinding = function() {
-            $("#control-xyhome").attr("data-bind", function() {
-                return $(this).attr("data-bind").replace(/sendHomeCommand\(\[\'x\', \'y\'\]\)/g, "sendCustomCommand({type:'commands',commands:['G28']})");
-            });
-        };
-
-        self.getAdditionalControls = function() {
-            return [
-
-                {
-                    "children": [{
-                        "commands": [
-                            "T0",
-                            "M851 Z-10",
-                            "M500",
-                            "G28",
-                            "G29",
-                            "G90",
-                            "G1 X75 Y75",
-                            "G90",
-                        ],
-                        "name": "Set Z-Offset"
-                    }, {
-                        "commands": [
-                            "G91",
-                            "G1 Z0.05",
-                            "G90"
-                        ],
-                        "name": "▲"
-                    }, {
-                        "commands": [
-                            "G91",
-                            "G1 Z-0.05",
-                            "G90"
-                        ],
-                        "name": "▼"
-                    }, {
-                        "commands": [
-                            "M852",
-                            "G1 Z10",
-                            "G28 X Y"
-                        ],
-                        "name": "Set Z-Offset"
-                    }],
-                    "collapsed": "true",
-                    "layout": "horizontal",
-                    "name": "Z-Offset"
-                }
-            ];
-        }
-
         self.customControls.onEventSettingsUpdated = function(payload) {
             $(".parsed-control").each(function() {
                 if (!$(this).hasClass("plugin_control")) {
@@ -220,22 +136,6 @@ $(function() {
                 }
             });
             self.customControls.requestData();
-        }
-
-        self.generateWrapperName = function(name, increment) {
-            if (increment) {
-                if ($(".octoprint-container").find("#" + name + "_" + increment + "_wrapper").length > 0) {
-                    return self.generateWrapperName(name, ++increment);
-                } else {
-                    return name + "_" + increment + "_wrapper";
-                }
-            } else {
-                if ($(".octoprint-container").find("#" + name + "_wrapper").length > 0) {
-                    return self.generateWrapperName(name, 1);
-                } else {
-                    return name + "_wrapper";
-                }
-            }
         }
 
         /* Modified from OctoPrint
@@ -300,36 +200,11 @@ $(function() {
                 "<li><a href='http://www.robo3d.com/terms-and-conditions' target='_blank'>Terms and Conditions</a></li>"
             );
 
-            // Merge Temperature and Control tabs
-            $("#temp_link").remove();
-            $("#control_link").addClass("active");
-            $("#control").prepend($("#temp").contents());
-            $("#control").addClass("active");
-            $("#temperature-graph").closest(".row").removeAttr("style");
-            $("#temperature-graph").closest(".row").attr("class", "row-fluid");
 
             $("#settings_dialog_label").text("Settings");
-            document.title = "Robo C2";
+            document.title = "Robo";
             $("#navbar .brand").html("<img src='/plugin/robotheme/static/logo.png' />");
 
-
-            $(".line-container").after($(".terminal button[data-bind*='toggleAutoscroll']").addClass("btn-default btn-sm text-light7 mr5"));
-            $(".terminal-options").append("<li class='divider'></li>");
-            $("#terminal-filterpanel label.checkbox").each(function() {
-                var commandName = $(this).find("input").attr("value").match("Send: (.*)Recv")[1];
-                commandName = commandName.replace(/\(|\)|\|/g, "");
-                $(this).find("span").replaceWith("<span>Supress " + commandName + "</span>");
-                $(this).css('margin-bottom', '0');
-                $("ul.terminal-options").append(
-                    $('<li>').append(
-                        $('<a>').attr('href', '#').append(
-                            $(this)
-                        )))
-            });
-            $("#terminal-sendpanel .input-append input").addClass("form-control").attr("placeholder", "Enter a command...").appendTo(".terminal-textbox");
-            $("#terminal-sendpanel .input-append button").addClass("btn-default btn-gradient btn-block").appendTo(".terminal-submit");
-            $("#terminal-filterpanel").parent().remove();
-            $(".terminal .pull-left, .terminal .pull-right").remove();
 
             $(".temperature-height").click(function() {
                 $(".temperature-height").toggleClass("active");
@@ -546,6 +421,8 @@ $(function() {
             self.parseCustomControls();
         }
 
+        // Print Completion popup
+
         self.onEventPrintDone = function(payload) {
             if (typeof Notification === 'undefined') {
                 console.log('Desktop notifications not available in your browser. Try Chromium.');
@@ -570,6 +447,8 @@ $(function() {
                 };
             }
         }
+
+        // Display printer serial name in header
 
         self.onDataUpdaterPluginMessage = function(plugin, data) {
             if (plugin === "robotheme") {
