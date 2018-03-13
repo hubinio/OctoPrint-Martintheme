@@ -344,6 +344,10 @@ $(function() {
             $("#settings_dialog_label").text("Settings");
             document.title = "Robo C2";
             $("#navbar .brand").html("<img src='/plugin/robotheme/static/logo.png' />");
+            // Settings -> Firmware Updater -> Browse button and subsequent input field
+            $("span.btn.input-group-btn.fileinput-button").attr("style", "width:9em;");
+            $("div.input-group.controls-row > span.span9").attr("style", "width:55%;padding-right:3px;padding-left:3px");
+            $("input.input.input-block-level").attr("style", "margin-left:50px;");
 
             // Merge Control and Terminal tabs
             $("#term_link").remove();
@@ -369,6 +373,7 @@ $(function() {
             $("#control .terminal").next(".row-fluid").prependTo("#terminal_main .accordion-inner");
             $("#control .terminal").prependTo("#terminal_main .accordion-inner");
 
+// end
             $('link[rel="shortcut icon"]').attr('href', '~/Octoprint-robotheme/octoprint-robotheme/static/favicon.ico');
             $("#terminal-output").addClass("well");
 
