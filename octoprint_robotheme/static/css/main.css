@@ -565,6 +565,12 @@ input[type="text"].search-query {
 #navbar_login input[type="checkbox"] {
   width: auto;
 }
+.hotend_target, .bed_target {
+  width: 150px;
+}
+.tempInput {
+  width: 4.5em;
+}
 /*===================================================
    F. Input Groups
 =================================================== */
