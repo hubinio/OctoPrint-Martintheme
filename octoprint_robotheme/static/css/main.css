@@ -1096,6 +1096,9 @@ span.fileinput-button {
   background-color: #E4E4E4;
   color: #777777;
 }
+#files .gcode_files .entry .additionalInfo {
+  padding-bottom: 32px;
+}
 ul.terminal-options li>a {
   padding: 3px 15px;
 }
