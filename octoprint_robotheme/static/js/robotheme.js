@@ -168,6 +168,14 @@ $(function() {
             });
         };
 
+        // Additional Controls -> Print History -> Add/Edit Note popup adjustment after data binding,
+        // giving it time for bootstrap-editable.min.js to be done with its magic
+        self.onAfterBinding = function() {
+            setTimeout(function() {
+                $('div.popover').css("left", "auto");
+            }, 12000);
+        }
+
         self.getAdditionalControls = function() {
             return [
 
@@ -213,7 +221,8 @@ $(function() {
             ];
         }
 
-        self.customControls.onEventSettingsUpdated = function(payload) {
+        self.
+customControls.onEventSettingsUpdated = function(payload) {
             $(".parsed-control").each(function() {
                 if (!$(this).hasClass("plugin_control")) {
                     $(this).remove();
