@@ -1,4 +1,4 @@
-# OctoPrint-robotheme
+# OctoPrint-martintheme
 
 **TODO:** Describe what your plugin does.
 This plugin changes the way octoprint looks on a browser.
